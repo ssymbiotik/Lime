@@ -24,11 +24,11 @@ jobs:
       with:
         node-version: '22'
 
-    - name: Start local devnet using docker-compose
-      uses: MarketSquare/docker-compose-action@v1.16
+    - name: Set up Docker Compose
+      uses: hoverkraft-tech/compose-action@v2.1.0
       with:
-        docker-compose-version: latest
-        run: up -d
+        compose-file: './docker-compose.yml'
+        up-flags: '--build'
 
     - name: Start Hardhat node
       run: |
