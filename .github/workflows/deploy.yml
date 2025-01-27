@@ -1,0 +1,52 @@
+name: Deploy
+
+on:
+  pull_request:
+    types:
+      - closed
+    labels:
+      - CI:Deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Docker
+      uses: docker/setup-buildx-action@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '22'
+
+    - name: Start local devnet using docker-compose
+      run: |
+        docker-compose up -d
+
+    - name: Start Hardhat node
+      run: |
+        cd hardhat
+        npx hardhat node
+
+    - name: Deploy contracts to local devnet
+      run: |
+        cd hardhat
+        npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
+
+    - name: Run Hardhat tests
+      run: |
+        cd hardhat
+        npx hardhat test
+
+    - name: Build Docker image with deployed contracts
+      run: |
+        docker build -t ssymbiotik7/hat:latest .
+
+    - name: Push Docker image to registry
+      run: |
+        docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        docker push ssymbiotik7/hat:latest
