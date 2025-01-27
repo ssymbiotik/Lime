@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   geth-devnet:
     image: ssymbiotik7/lime  # Use the image you built
