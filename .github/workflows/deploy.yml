@@ -30,11 +30,6 @@ jobs:
         compose-file: './docker-compose.yaml'
         up-flags: '--build'
 
-    - name: Start Hardhat node
-      run: |
-        cd hardhat
-        npx hardhat node
-
     - name: Deploy contracts to local devnet
       run: |
         cd hardhat
