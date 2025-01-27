@@ -27,7 +27,7 @@ jobs:
     - name: Set up Docker Compose
       uses: hoverkraft-tech/compose-action@v2.1.0
       with:
-        compose-file: './docker-compose.yml'
+        compose-file: './docker-compose.yaml'
         up-flags: '--build'
 
     - name: Start Hardhat node
