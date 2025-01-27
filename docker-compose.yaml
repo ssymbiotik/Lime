@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  geth-devnet:
+    image: ssymbiotik7/lime  # Use the image you built
+    container_name: geth-devnet
+    ports:
+      - "8545:8545"  # HTTP JSON-RPC port
+      - "8546:8546"  # WebSocket JSON-RPC port
+      - "30303:30303"  # P2P networking port
+      - "30303:30303/udp"  # P2P networking UDP port
+    command: >
+      --dev
+      --http
+      --http.addr "0.0.0.0"
+      --http.api "eth,net,web3,debug"
+      --http.corsdomain "*"
+      --ws
+      --ws.addr "0.0.0.0"
+      --ws.api "eth,net,web3,debug"
+      --ws.origins "*"
+      --ipcdisable
+      --verbosity 3
+    volumes:
+      - ./go-ethereum/data:/root/.ethereum  # Persist blockchain data to the host
+    networks:
+      - geth-network
+
+networks:
+  geth-network:
+    driver: bridge
