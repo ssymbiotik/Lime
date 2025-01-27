@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t ssymbiotik7/lime:latest .
+        run: docker buildx build --platform linux/amd64 -t ssymbiotik7/lime:latest .
 
       - name: Push Docker image
         run: docker push ssymbiotik7/lime:latest
