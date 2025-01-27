@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - name: Checkout repository
@@ -33,7 +33,7 @@ jobs:
     - name: Deploy contracts to local devnet
       run: |
         cd hardhat
-        npm install --save-dev hardhat --no-optional
+        npm install --save-dev hardhat
         npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
 
     - name: Run Hardhat tests
