@@ -32,7 +32,7 @@ jobs:
         compose-file: './docker-compose.yaml'
         up-flags: '--build'
 
-    - name: Deploy contracts to local devnet
+    - name: Install hardhat
       run: |
         cd hardhat
         npm install --save-dev hardhat
@@ -40,7 +40,7 @@ jobs:
     - name: Deploy contracts
       run: |
         cd hardhat
-        npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
+        yes | npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
 
     - name: Run Hardhat tests
       run: |
