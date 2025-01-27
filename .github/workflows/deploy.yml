@@ -34,6 +34,10 @@ jobs:
       run: |
         cd hardhat
         npm install --save-dev hardhat
+
+    - name: Deploy contracts
+      run: |
+        cd hardhat
         npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
 
     - name: Run Hardhat tests
