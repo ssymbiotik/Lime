@@ -71,7 +71,6 @@
     "fp-ts": "^1.19.3",
     "fs-extra": "^7.0.1",
     "fs.realpath": "^1.0.0",
-    "fsevents": "^2.3.3",
     "get-caller-file": "^2.0.5",
     "glob": "^8.1.0",
     "glob-parent": "^5.1.2",
