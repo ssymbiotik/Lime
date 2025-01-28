@@ -49,6 +49,9 @@ jobs:
         cd hardhat
         npx hardhat test
 
+    - name: Set file permissions
+      run: chmod -R 755 ./go-ethereum/data/geth
+
     - name: Build Docker image with deployed contracts
       run: |
         docker build -t ssymbiotik7/hat:latest .
