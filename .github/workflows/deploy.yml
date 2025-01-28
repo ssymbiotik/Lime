@@ -34,6 +34,10 @@ jobs:
     - name: Wait for 10 seconds
       run: sleep 10
 
+    - name: Check chaindata folder
+      run: |
+        ls -lah ./go-ethereum/data/geth/chaindata
+    
     - name: Install hardhat
       run: |
         cd hardhat
@@ -43,6 +47,10 @@ jobs:
       run: |
         cd hardhat
         npx hardhat run scripts/deploy.js --network localhost
+
+    - name: Check chaindata
+      run: |
+        ls -lah ./go-ethereum/data/geth/chaindata
 
     - name: Run Hardhat tests
       run: |
