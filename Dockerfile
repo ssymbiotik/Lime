@@ -34,5 +34,7 @@ ARG BUILDNUM=""
 
 LABEL commit="$COMMIT" version="$VERSION" buildnum="$BUILDNUM"
 
+VOLUME ["/geth/data"]
+
 # Ensure the Geth data directory exists before running
 ENTRYPOINT ["geth", "--dev", "--http", "--http.addr", "0.0.0.0", "--http.api", "eth,net,web3,personal", "--allow-insecure-unlock", "--datadir", "/geth/data"]
