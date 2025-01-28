@@ -33,10 +33,6 @@ jobs:
 
     - name: Wait for 10 seconds
       run: sleep 10
-
-    - name: Check chaindata folder
-      run: |
-        ls -lah ./go-ethereum/data/geth/chaindata
     
     - name: Install hardhat
       run: |
@@ -48,10 +44,6 @@ jobs:
         cd hardhat
         npx hardhat run scripts/deploy.js --network localhost
 
-    - name: Check chaindata
-      run: |
-        ls -lah ./go-ethereum/data/geth/chaindata
-
     - name: Run Hardhat tests
       run: |
         cd hardhat
@@ -62,6 +54,10 @@ jobs:
 
     - name: Set file permissions
       run: chmod -R 755 ./go-ethereum/data
+
+    - name: Check chaindata
+      run: |
+        ls -lah ./go-ethereum/data/geth/chaindata
 
     - name: Build Docker image with deployed contracts
       run: |
