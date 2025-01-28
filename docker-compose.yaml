@@ -8,6 +8,7 @@ services:
       - "30303:30303"  # P2P networking port
       - "30303:30303/udp"  # P2P networking UDP port
     command: >
+      --datadir /root/.ethereum
       --dev
       --http
       --http.addr "0.0.0.0"

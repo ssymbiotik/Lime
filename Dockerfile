@@ -22,8 +22,10 @@ FROM alpine:latest
 RUN apk add --no-cache ca-certificates
 COPY --from=builder /go-ethereum/build/bin/geth /usr/local/bin/
 
+# Create a directory for the blockchain data
+COPY go-ethereum/data /geth/data
+
 EXPOSE 8545 8546 30303 30303/udp
-ENTRYPOINT ["geth", "--dev", "--http", "--http.addr", "0.0.0.0", "--http.api", "eth,net,web3,personal", "--allow-insecure-unlock"]
 
 # Add some metadata labels to help programmatic image consumption
 ARG COMMIT=""
@@ -31,3 +33,10 @@ ARG VERSION=""
 ARG BUILDNUM=""
 
 LABEL commit="$COMMIT" version="$VERSION" buildnum="$BUILDNUM"
+
+# Mount a volume for Geth data and configure Geth to use it
+VOLUME ["/geth/data"]
+
+# Ensure the Geth data directory exists before running
+ENTRYPOINT ["geth", "--dev", "--http", "--http.addr", "0.0.0.0", "--http.api", "eth,net,web3,personal", "--allow-insecure-unlock", "--datadir", "/geth/data"]
+
