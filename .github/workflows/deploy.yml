@@ -30,12 +30,17 @@ jobs:
       uses: hoverkraft-tech/compose-action@v2.1.0
       with:
         compose-file: './docker-compose.yaml'
-        up-flags: '--build'
 
     - name: Install hardhat
       run: |
         cd hardhat
         npm install --save-dev hardhat
+
+    - name: Start Hardhat node
+      run: |
+        cd hardhat
+        npx hardhat node &
+        sleep 10
 
     - name: Deploy contracts
       run: |
