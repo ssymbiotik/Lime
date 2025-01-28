@@ -31,21 +31,18 @@ jobs:
       with:
         compose-file: './docker-compose.yaml'
 
+    - name: Wait for 10 seconds
+      run: sleep 10
+
     - name: Install hardhat
       run: |
         cd hardhat
         npm install --save-dev hardhat
 
-    - name: Start Hardhat node
-      run: |
-        cd hardhat
-        npx hardhat node &
-        sleep 10
-
     - name: Deploy contracts
       run: |
         cd hardhat
-        yes | npx hardhat ignition deploy ./ignition/modules/Lock.js --network localhost
+        npx hardhat run scripts/deploy.js --network localhost
 
     - name: Run Hardhat tests
       run: |
