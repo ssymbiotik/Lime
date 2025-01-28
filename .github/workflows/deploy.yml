@@ -33,6 +33,12 @@ jobs:
 
     - name: Wait for 10 seconds
       run: sleep 10
+
+    - name: Change directory ownership
+      run: sudo chown -R $USER:$USER ./go-ethereum/data
+
+    - name: Set file permissions
+      run: chmod -R 755 ./go-ethereum/data
     
     - name: Install hardhat
       run: |
@@ -48,12 +54,6 @@ jobs:
       run: |
         cd hardhat
         npx hardhat test
-
-    - name: Change directory ownership
-      run: sudo chown -R $USER:$USER ./go-ethereum/data
-
-    - name: Set file permissions
-      run: chmod -R 755 ./go-ethereum/data
 
     - name: Check chaindata
       run: |
