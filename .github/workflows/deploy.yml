@@ -56,6 +56,9 @@ jobs:
         cd hardhat
         npx hardhat run scripts/deploy.js --network localhost
 
+    - name: Sleep for 10 seconds
+      run: sleep 10
+
     - name: Run Hardhat tests
       run: |
         cd hardhat
